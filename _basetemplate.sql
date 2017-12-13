@@ -1,0 +1,36 @@
+﻿/**
+   TITLE: Table DDL  | DML  |  DCL
+     __DATABASE_NAME__.__SCHEMA_NAME__.__TABLE_NAME__
+   DESCRIPTION:
+   
+   REVISION HISTORY:
+
+     DATE       AUTHOR          CHANGE DESCRIPTION                                             
+     
+     YYYY.MM.DD __AUTHOR_NAME__ Initial Draft
+*/
+USE _Database_Name_
+GO
+
+IF EXISTS (SELECT * FROM sys.objects
+           WHERE OBJECT_ID = OBJECT_ID(N'__SCHEMA_NAME__.__TABLE_NAME__')
+                 AND type IN (N'U'))
+    DROP TABLE _SCHEMA_NAME_._TABLE_NAME_;
+GO
+
+SET ANSI_NULLS ON;
+SET QUOTED_IDENTIFIER ON;
+SET XACT_ABORT ON;
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.objects
+               WHERE OBJECT_ID = OBJECT_ID(N'__SCHEMA_NAME__.__TABLE_NAME__')
+                     AND type IN (N'U'))
+  BEGIN
+    CREATE TABLE _SCHEMA_NAME_._TABLE_NAME_ (
+            _TABLE_NAME_ID BIGINT NOT NULL IDENTITY(1,1) CONSTRAINT PK__TABLE_NAME_ PRIMARY KEY CLUSTERED
+          , _TABLE_NAME_Name VARCHAR(128) NOT NULL
+          , __TABLE_NAME_Desc VARCHAR(512) NULL
+        );
+  END
+GO
